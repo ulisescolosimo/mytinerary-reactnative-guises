@@ -31,7 +31,9 @@
     "react-navigation-native": "^0.0.0",
     "react-redux": "^8.0.4",
     "redux": "^4.2.0",
-    "scrcpy": "^1.1.6"
+    "scrcpy": "^1.1.6",
+    "expo-av": "~12.0.4",
+    "expo-font": "~10.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
