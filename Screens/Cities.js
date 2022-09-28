@@ -17,12 +17,12 @@ export default function Cities() {
     return value.charAt(0).toUpperCase() + value.slice(1)
   }
 
-  const filteredData = citiesResponse.filter(item => item.city.includes(input))
+  const filteredData = citiesResponse?.filter(item => item?.city?.includes(input))
 
   return (
     <View style={styles.container}>
       <TextInput placeholder={'Enter city...'} style={styles.input} onChangeText={(value)=> setInput(upperCaseOne(value))} />
-      <FlatList data={filteredData.length > 0 ? filteredData : citiesResponse} renderItem={({ item }) => (
+      <FlatList data={filteredData?.length > 0 ? filteredData : citiesResponse} renderItem={({ item }) => (
         <TouchableOpacity onPress={() => navigation.navigate('Details', item?._id)}>
           <Card key={item?._id}>
             <Text style={styles.text}>{ item?.city }</Text>
