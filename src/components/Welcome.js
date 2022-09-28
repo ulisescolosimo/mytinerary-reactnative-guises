@@ -1,19 +1,33 @@
 import { StatusBar } from 'expo-status-bar';
 import { ScrollView, StyleSheet, Text, View, Image, TouchableOpacity, FlatList} from 'react-native';
-import logo from '../../assets/logo-header.jpg';
 import React from 'react'
 import { useNavigation } from '@react-navigation/native';
+import {
+  useFonts,
+  Roboto_400Regular,
+} from "@expo-google-fonts/roboto";
+
 
 export default function Welcome({title}) {
 
   const navigation = useNavigation(); 
 
+  let [fontsLoaded] = useFonts({
+    Roboto_400Regular,
+  });
+
+  if (!fontsLoaded) {
+    return <AppLoading />
+  } else {
+    
   return (
     <View style={styles.container}>
-        <View style={{width: '100%', backgroundColor: 'black', display: 'flex', justifyContent: 'center', alignItems:'center'}}>
-          <Image source={logo} resizeMode={'contain'} style={{width: '100%'}} />
+        <View style={{backgroundColor: 'rgba(0,0,0,0)', display: 'flex', justifyContent: 'center', alignItems:'center'}}>
+        <Text style={styles.myTiText} >
+          My Tinerary
+        </Text>
         </View>
-        <Text style={{ display: 'flex', margin: 30, backgroundColor: 'white', color:'black', padding: 20 }}>
+        <Text style={styles.title}>
           {title}
         </Text>
         <View style={{width: '100%', display: 'flex', justifyContent: 'center', alignItems:'center'}}>
@@ -25,7 +39,7 @@ export default function Welcome({title}) {
       <StatusBar style="auto" />
     </View>
 )
-}
+}}
 
 const styles = StyleSheet.create({
     container: {
@@ -33,6 +47,7 @@ const styles = StyleSheet.create({
       margin: 0,
       padding: 0,
       display: 'flex',
+      backgroundColor: "rgba(0,0,0,0)"
     },
     text: {
       textAlign: 'center',
@@ -42,6 +57,7 @@ const styles = StyleSheet.create({
     button: {
       backgroundColor: 'white',
       padding: 20,
+      marginTop: 20,
       borderRadius: 10,
       borderWidth: 2,
       display: 'flex',
@@ -49,6 +65,22 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       textAlign: 'center'
     },
-    list: {
+    myTiText: {
+      fontSize: 50,
+      color:'white',
+      letterSpacing: 6,
+      fontStyle: 'italic',
+      marginTop:50
+ 
+    },
+
+    title: {
+      color: "white",
+      textAlign: 'center',
+      fontSize: 20,
+      margin: 30,
+      paddingBottom:30,
+      
+  
     }
 })
