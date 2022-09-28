@@ -1,17 +1,22 @@
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useGetItisMutation } from '../features/itineraryAPI' 
+import { useNavigation } from '@react-navigation/native';
 
 export default function Itineraries({id}) {
 
+    const navigation = useNavigation();
+
     const [getCity] = useGetItisMutation();
     const [itineraries, setItineraries] = useState()
+    console.log(itineraries);
 
     async function getEvent() {
         await getCity(id)
         .then((res)=>{
             if (res.data?.success) {
                 setItineraries(res.data.response)
+                console.log(itineraries);
             } else {
                 console.log(res.error)
             }
@@ -25,9 +30,10 @@ export default function Itineraries({id}) {
 return (
     <View style={styles.container}>
         <View>
-            <Text style={{fontSize: 30}}>Itineraries</Text>
+            {itineraries?.length > 0 ? <Text style={{fontSize: 30}}>Itineraries</Text> : <Text style={{fontSize: 30}}>No itineraries found</Text>}
         </View>
     <FlatList data={itineraries} renderItem={({ item }) => (
+        <TouchableOpacity onPress={() => navigation.navigate('Activities', item?._id)}>
         <View style={styles.card} key={item?._id}>
         <View style={styles.cardContent}>
             <Image 
@@ -37,7 +43,6 @@ return (
             <Text style={styles.text}>{item?.user?.name}</Text>
             <View>
                 <Text style={styles.text}>{item?.name}</Text>
-                <Text style={styles.text}>{item?.city?.city}</Text>
                 <Text style={styles.text}>Likes:{item?.likes?.length}</Text>
                 <Text style={styles.text}>Duration: {item?.duration} minutes</Text>
                 <Text style={styles.text}>Price: ${item?.price}</Text>
@@ -46,7 +51,8 @@ return (
                 </View>
             </View>
         </View>
-      </View>
+        </View>
+        </TouchableOpacity>
       )} />
     </View>
 )
