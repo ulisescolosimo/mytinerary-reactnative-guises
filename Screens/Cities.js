@@ -24,7 +24,7 @@ export default function Cities() {
             <Image 
                 source={{uri:item?.photo}}
                 style={styles.image}
-            />
+            />                                                                   
           </Card>
         </TouchableOpacity>
       )} />
