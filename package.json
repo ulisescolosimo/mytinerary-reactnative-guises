@@ -35,7 +35,10 @@
     "react-navigation-native": "^0.0.0",
     "react-redux": "^8.0.4",
     "redux": "^4.2.0",
-    "scrcpy": "^1.1.6"
+    "scrcpy": "^1.1.6",
+    "expo-auth-session": "~3.7.1",
+    "expo-random": "~12.3.0"
+
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"

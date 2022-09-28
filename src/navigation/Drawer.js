@@ -1,6 +1,7 @@
 import React from 'react'
 import HomeScreen from '../../Screens/HomeScreen'
 import Cities from '../../Screens/Cities'
+import SignUp from '../../Screens/SignUp'
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import Detail from '../../Screens/Detail';
 import Activities from '../../Screens/Activities';
@@ -33,11 +34,15 @@ return (
       <DrawerNavigation.Screen name="Cities" component={Cities} />
       { logged ? <DrawerNavigation.Screen name="Sign Out" component={SignOut} /> : <DrawerNavigation.Screen name="Sign In" component={SignIn} />}
       <DrawerNavigation.Screen options={{
+      <DrawerNavigation.Screen options={{
                   drawerItemStyle: { display: 'none' }
+
         }} name="Details" component={Detail} />
+      <DrawerNavigation.Screen name="SignUp" component={SignUp} />
       <DrawerNavigation.Screen options={{
                   drawerItemStyle: { display: 'none' }
         }} name="Activities" component={Activities} />
+
     </DrawerNavigation.Navigator>
 )
 }
