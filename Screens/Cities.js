@@ -25,7 +25,7 @@ export default function Cities() {
       <FlatList data={filteredData?.length > 0 ? filteredData : citiesResponse} renderItem={({ item }) => (
         <TouchableOpacity onPress={() => navigation.navigate('Details', item?._id)}>
           <Card key={item?._id}>
-            <Text style={styles.text}>{ item?.city }</Text>
+            <Text key={item?._id} style={styles.text}>{ item?.city }</Text>
             <Image 
                 source={{uri:item?.photo}}
                 style={styles.image}
@@ -62,6 +62,8 @@ const styles = StyleSheet.create({
     borderColor: 'grey',
     padding: 8,
     margin: 10,
-    width: 200
+    width: 200,
+    borderRadius: 10,
+    textAlign: 'center'
   }
 })

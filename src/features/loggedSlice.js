@@ -6,7 +6,7 @@ export const loggedSlice = createSlice({
         loggedState: false,
     },
     reducers: {
-        entry: (state) => {
+        loggedReverse: (state) => {
             state.loggedState = !state.loggedState;
         },
         loggedTrue: (state) => {
@@ -15,6 +15,6 @@ export const loggedSlice = createSlice({
     }
 })
 
-export const { entry, loggedTrue } = loggedSlice.actions
+export const { loggedReverse, loggedTrue } = loggedSlice.actions
 
 export default loggedSlice.reducer

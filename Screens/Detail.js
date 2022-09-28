@@ -12,7 +12,6 @@ export default function Detail({route}) {
 
   return (
     <ScrollView>
-    <View style={styles.cardContent}>
         <View style={styles.card}>
             <Text style={styles.text}>{citiesResponse?.city}</Text>
             <Image 
@@ -28,7 +27,6 @@ export default function Detail({route}) {
             <Text style={styles.text}>Foundation year:{citiesResponse?.foundation}</Text>
         </View>
         <Button onPress={() => navigation.navigate('Cities')} title={'Go back to cities'} />
-    </View>
     <Itineraries id={route.params} />
     </ScrollView>
 
