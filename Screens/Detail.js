@@ -1,11 +1,14 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView, FlatList, TextInput} from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView, FlatList, Button} from 'react-native';
 import React, { useState } from 'react'
 import { useGetCityIdQuery } from '../src/features/citiesApi' 
+import { useNavigation } from '@react-navigation/native';
+import Itineraries from '../src/components/Itineraries';
 
 export default function Detail({route}) {
 
     const {data: cities} = useGetCityIdQuery(route.params)
     const citiesResponse = cities?.response
+    const navigation = useNavigation(); 
 
   return (
     <ScrollView>
@@ -24,6 +27,10 @@ export default function Detail({route}) {
         <View style={styles.cardText}>
             <Text style={styles.text}>Foundation year:{citiesResponse?.foundation}</Text>
         </View>
+        <Button onPress={() => navigation.navigate('Cities')} title={'Go back to cities'} />
+    </View>
+    <View>
+      <Itineraries id={route.params} />
     </View>
     </ScrollView>
 
@@ -39,7 +46,6 @@ const styles = StyleSheet.create({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        marginVertical: 10,
         marginHorizontal: 20
       },
       cardText: {
@@ -57,7 +63,6 @@ const styles = StyleSheet.create({
         width: 300,
         height: 220,
         resizeMode: 'contain',
-        borderRadius: 6
       },
       cardContent: {
         marginVertical: 20,
