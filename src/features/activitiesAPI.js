@@ -6,7 +6,7 @@ export const activityAPI = createApi({
 
 
     baseQuery: fetchBaseQuery({
-        baseUrl: 'https://mytinerary-guises-node.herokuapp.com/'
+        baseUrl: 'https://mytinerary-guises-node.herokuapp.com'
     }),
 
 
