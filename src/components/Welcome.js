@@ -2,23 +2,23 @@ import { StatusBar } from 'expo-status-bar';
 import { ScrollView, StyleSheet, Text, View, Image, TouchableOpacity, FlatList} from 'react-native';
 import React from 'react'
 import { useNavigation } from '@react-navigation/native';
-import {
+/* import {
   useFonts,
   Roboto_400Regular,
-} from "@expo-google-fonts/roboto";
+} from "@expo-google-fonts/roboto"; */
 
 
 export default function Welcome({title}) {
 
   const navigation = useNavigation(); 
 
-  let [fontsLoaded] = useFonts({
+  /* let [fontsLoaded] = useFonts({
     Roboto_400Regular,
   });
 
   if (!fontsLoaded) {
     return <AppLoading />
-  } else {
+  } else { */
     
   return (
     <View style={styles.container}>
@@ -39,7 +39,7 @@ export default function Welcome({title}) {
       <StatusBar style="auto" />
     </View>
 )
-}}
+}
 
 const styles = StyleSheet.create({
     container: {
