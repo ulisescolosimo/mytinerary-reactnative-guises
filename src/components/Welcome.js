@@ -15,10 +15,6 @@ export default function Welcome({title}) {
   let [fontsLoaded] = useFonts({
     Roboto_400Regular,
   });
-
-  if (!fontsLoaded) {
-    return <AppLoading />
-  } else {
     
   return (
     <View style={styles.container}>
@@ -39,7 +35,7 @@ export default function Welcome({title}) {
       <StatusBar style="auto" />
     </View>
 )
-}}
+}
 
 const styles = StyleSheet.create({
     container: {
@@ -52,18 +48,17 @@ const styles = StyleSheet.create({
     text: {
       textAlign: 'center',
       color: 'black',
-      fontSize: 30
+      fontSize: 30,
     },
     button: {
       backgroundColor: 'white',
       padding: 20,
-      marginTop: 20,
       borderRadius: 10,
       borderWidth: 2,
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      textAlign: 'center'
+      textAlign: 'center',
     },
     myTiText: {
       fontSize: 50,
@@ -71,7 +66,6 @@ const styles = StyleSheet.create({
       letterSpacing: 6,
       fontStyle: 'italic',
       marginTop:50
- 
     },
 
     title: {
@@ -79,8 +73,6 @@ const styles = StyleSheet.create({
       textAlign: 'center',
       fontSize: 20,
       margin: 30,
-      paddingBottom:30,
-      
-  
+      paddingBottom:15,
     }
 })
