@@ -6,7 +6,7 @@ export const myTineraryAPI = createApi({
 
 
     baseQuery: fetchBaseQuery({
-        baseUrl: 'http://192.168.0.16:4000'
+        baseUrl: 'https://mytinerary-guises-node.herokuapp.com/'
     }),
 
 
