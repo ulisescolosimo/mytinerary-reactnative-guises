@@ -29,9 +29,7 @@ export default function Detail({route}) {
         </View>
         <Button onPress={() => navigation.navigate('Cities')} title={'Go back to cities'} />
     </View>
-    <View>
-      <Itineraries id={route.params} />
-    </View>
+    <Itineraries id={route.params} />
     </ScrollView>
 
   )
