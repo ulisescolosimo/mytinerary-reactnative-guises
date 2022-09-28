@@ -13,13 +13,18 @@ export default function Cities() {
 
   const [input, setInput] = useState()
 
+  function upperCaseOne(value){
+    return value.charAt(0).toUpperCase() + value.slice(1)
+  }
+
+  const filteredData = citiesResponse.filter(item => item.city.includes(input))
+
   return (
     <View style={styles.container}>
-      <TextInput placeholder={'Enter city...'} style={styles.input} onChangeText={(value)=> setInput(value)} />
-      <Text>Name: {input}</Text>
-      <FlatList data={citiesResponse} renderItem={({ item }) => (
+      <TextInput placeholder={'Enter city...'} style={styles.input} onChangeText={(value)=> setInput(upperCaseOne(value))} />
+      <FlatList data={filteredData.length > 0 ? filteredData : citiesResponse} renderItem={({ item }) => (
         <TouchableOpacity onPress={() => navigation.navigate('Details', item?._id)}>
-          <Card>
+          <Card key={item?._id}>
             <Text style={styles.text}>{ item?.city }</Text>
             <Image 
                 source={{uri:item?.photo}}
@@ -39,7 +44,9 @@ const styles = StyleSheet.create({
     padding: 0,
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginBottom: 45,
+    marginTop: 20
   },
   image: {
     width: 300,
