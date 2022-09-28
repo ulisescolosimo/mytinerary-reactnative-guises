@@ -19,8 +19,7 @@ export default configureStore({
     logged: loggedSlice,
     refresh: refreshSlice
   },
-  middleware: (getAllCities) => getAllCities({
-      immutableCheck: false,
-      serializableCheck: false
-  })
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(
+    citiesApi.middleware, activityAPI.middleware, itineraryAPI.middleware, myTineraryAPI.middleware
+    )
 })
