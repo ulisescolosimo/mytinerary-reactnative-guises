@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView, FlatList, TextInput} from 'react-native';
+/* import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView, FlatList, TextInput} from 'react-native';
 import React, { useState } from 'react'
 import { useGetCityIdQuery } from '../src/features/citiesApi' 
 
@@ -69,4 +69,4 @@ const styles = StyleSheet.create({
       text: {
         fontSize: 20
       }
-})
+}) */
