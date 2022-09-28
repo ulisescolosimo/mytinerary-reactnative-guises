@@ -25,15 +25,15 @@ export default function Carousel({cities}) {
         renderItem={({ item }) => {
           return (
           <Animated.View style={{
-            marginTop:20,
-            borderRadius:100,
-            width:400          
+            marginTop:30,
+            width:400,
+            height: 250,     
             }}>
             <Image 
                 source={{uri:item.photo}}
                 style={styles.image}
             />
-            <Text style={{textAlign:'center', fontSize: 22}}>{item.city}</Text>
+            <Text style={{textAlign:'center', fontSize: 30, color: 'white'}}>{item.city}</Text>
           </Animated.View>)  
             
         }}
@@ -45,10 +45,10 @@ const styles = StyleSheet.create({
 
   carousel : {
     minheight: '100%',
-    color: 'black'
+    color: 'white'
   },
   image: {
     height: 220,
     resizeMode: 'contain',
   }
-}) //
+})

@@ -29,7 +29,7 @@ export default function HomeScreen() {
         ref={video}
         style={HomeStyles.video}
         source={{
-          uri: 'https://joy.videvo.net/videvo_files/video/free/2015-08/small_watermarked/SunsetWavesMedium_preview.webm?v=1541089',
+          uri: 'https://player.vimeo.com/external/570600111.sd.mp4?s=de62b35ce18bcef2c41d5a1cab4f84125a6d79b7&profile_id=165&oauth2_token_id=57447761',
         }}
         rate={.7}
         shouldPlay={true}

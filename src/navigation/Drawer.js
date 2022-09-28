@@ -5,6 +5,7 @@ import SignUp from '../../Screens/SignUp'
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import { NavigationContainer } from '@react-navigation/native';
 import Detail from '../../Screens/Detail';
+import Activities from '../../Screens/Activities';
 
 const DrawerNavigation = createDrawerNavigator();
 
@@ -20,8 +21,15 @@ return (
       <DrawerNavigation.Screen name="Cities" component={Cities} />
       {/* <DrawerNavigation.Screen options={{
                   drawerItemStyle: { display: 'none' }
+
         }} name="Details" component={Detail} /> */}
       <DrawerNavigation.Screen name="SignUp" component={SignUp} />
+
+        }} name="Details" component={Detail} />
+      <DrawerNavigation.Screen options={{
+                  drawerItemStyle: { display: 'none' }
+        }} name="Activities" component={Activities} />
+
     </DrawerNavigation.Navigator>
 )
 }
