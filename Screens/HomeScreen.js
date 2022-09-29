@@ -34,7 +34,7 @@ export default function HomeScreen() {
         rate={.7}
         shouldPlay={true}
         isLooping={true}
-        muted={true}
+        isMuted={true}
         resizeMode="cover"
         onPlaybackStatusUpdate={status => setStatus(() => status)}
       /> 
@@ -51,7 +51,7 @@ const HomeStyles = StyleSheet.create({
     right: 0,
     left: 0,
     bottom: 0,
-    opacity: 1
+    opacity: 1,
   },
   title: {
     color:"red"
