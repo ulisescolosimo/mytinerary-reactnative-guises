@@ -46,16 +46,24 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 45,
-    marginTop: 20
+    marginTop: 20,
+    
   },
   image: {
     width: 300,
-    height: 220,
-    resizeMode: 'cover',
-    borderRadius: 6
+    height: 250,
+    resizeMode: "cover",
+    borderRadius: 6,
   },
   text: {
-    fontSize: 25
+    fontSize: 25,
+    color: "white",
+    backgroundColor:"#423f3e",
+    width:"100%",
+    textAlign: "center",
+    margin: 5,
+    opacity:.9
+    
   },
   input: {
     borderWidth: 1,
@@ -64,6 +72,6 @@ const styles = StyleSheet.create({
     margin: 10,
     width: 200,
     borderRadius: 10,
-    textAlign: 'center'
+    textAlign: 'center',
   }
 })
