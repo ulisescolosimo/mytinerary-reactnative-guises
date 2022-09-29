@@ -34,11 +34,11 @@ return (
       <DrawerNavigation.Screen name="Cities" component={Cities} />
       { logged ? <DrawerNavigation.Screen name="Sign Out" component={SignOut} /> : <DrawerNavigation.Screen name="Sign In" component={SignIn} />}
       <DrawerNavigation.Screen options={{
-      <DrawerNavigation.Screen options={{
                   drawerItemStyle: { display: 'none' }
 
         }} name="Details" component={Detail} />
       <DrawerNavigation.Screen name="SignUp" component={SignUp} />
+      <DrawerNavigation.Screen name="SignIn" component={SignIn} />
       <DrawerNavigation.Screen options={{
                   drawerItemStyle: { display: 'none' }
         }} name="Activities" component={Activities} />
