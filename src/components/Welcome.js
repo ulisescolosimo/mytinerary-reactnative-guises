@@ -2,24 +2,10 @@ import { StatusBar } from 'expo-status-bar';
 import { ScrollView, StyleSheet, Text, View, Image, TouchableOpacity, FlatList} from 'react-native';
 import React from 'react'
 import { useNavigation } from '@react-navigation/native';
-/* import {
-  useFonts,
-  Roboto_400Regular,
-} from "@expo-google-fonts/roboto"; */
-
 
 export default function Welcome({title}) {
 
   const navigation = useNavigation(); 
-
-  /* let [fontsLoaded] = useFonts({
-    Roboto_400Regular,
-  });
-
-  if (!fontsLoaded) {
-    return <AppLoading />
-  } else { */
-
     
   return (
     <View style={styles.container}>
@@ -49,11 +35,14 @@ const styles = StyleSheet.create({
       padding: 0,
       display: 'flex',
       backgroundColor: "rgba(0,0,0,0)"
+      
     },
     text: {
       textAlign: 'center',
       color: 'black',
       fontSize: 30,
+      zIndex:1, 
+      
     },
     button: {
       backgroundColor: 'white',
@@ -70,7 +59,8 @@ const styles = StyleSheet.create({
       color:'white',
       letterSpacing: 6,
       fontStyle: 'italic',
-      marginTop:50
+      marginTop:50,
+      fontFamily: 'Roboto'
     },
 
     title: {
@@ -79,5 +69,6 @@ const styles = StyleSheet.create({
       fontSize: 20,
       margin: 30,
       paddingBottom:15,
+      fontFamily: 'RobotoSlab_400Regular                                                                   '
     }
 })
