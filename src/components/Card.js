@@ -14,17 +14,18 @@ export default function Card(props) {
 const styles = StyleSheet.create({
   card: {
     borderRadius: 6,
-    elevation: 3,
+    elevation: 5,
     backgroundColor: '#fff',
-    shadowOffset: { width: 1, height: 1 },
+    shadowOffset: { width: .5, height: .5 },
     shadowColor: '#333',
-    shadowOpacity: 0.3,
+    shadowOpacity: 1,
     shadowRadius: 2,
     marginHorizontal: 4,
     marginVertical: 6,
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    focusable: true
   },
   cardContent: {
     marginHorizontal: 18,

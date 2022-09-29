@@ -8,7 +8,7 @@ import travelers from '../assets/travelers.png'
 export default function SignUp() {
 
 const {width: screenWidth, height: screenHeigth} = Dimensions.get('window');
-/* const navigation = useNavigation();  */
+const navigation = useNavigation(); 
       
   return (
     <View style={{
@@ -27,7 +27,7 @@ const {width: screenWidth, height: screenHeigth} = Dimensions.get('window');
                   <Text style={SignUpstyles.titleInfo}>If you already have an account sign in here!
                   </Text>
 
-                  <TouchableOpacity //onPress={() => navigation.navigate('SingIn')}
+                  <TouchableOpacity onPress={() => navigation.navigate('SignIn')}
                         style={SignUpstyles.button}>
                         <Text style={{ fontSize: 17, color: 'white', textAlign:'center' }}>Sign In</Text>
                   </TouchableOpacity>
