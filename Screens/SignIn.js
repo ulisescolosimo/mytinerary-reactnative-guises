@@ -68,7 +68,7 @@ return (
                 <Text style={SignInstyles.titleInfo}>If you don't have an account, sign up here!
                 </Text>
 
-                  <TouchableOpacity //onPress={() => navigation.navigate('SingIn')}
+                  <TouchableOpacity onPress={() => navigation.navigate('SignUp')}
                         style={SignInstyles.button}>
                         <Text style={{ fontSize: 17, color: 'white', textAlign:'center' }}>Sign Up</Text>
                 </TouchableOpacity>
