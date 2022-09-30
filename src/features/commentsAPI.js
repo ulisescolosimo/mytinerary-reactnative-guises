@@ -5,7 +5,7 @@ export const commentsAPI =  createApi({
     reducerPath: 'commentsAPI',
 
     baseQuery: fetchBaseQuery({
-        baseUrl: 'https://mytinerary-guises-node.herokuapp.com/'
+        baseUrl: 'http://192.168.0.16:4000'
     }),
 
     endpoints: (builder) => ({
