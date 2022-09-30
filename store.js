@@ -20,6 +20,5 @@ export default configureStore({
     refresh: refreshSlice
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(
-    citiesApi.middleware, activityAPI.middleware, itineraryAPI.middleware, myTineraryAPI.middleware
-    )
+    citiesApi.middleware, activityAPI.middleware, itineraryAPI.middleware, usersAPI.middleware)
 })
