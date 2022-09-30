@@ -4,7 +4,7 @@ const citiesApi = createApi ({
       reducerPath: "citiesApi",
 
       baseQuery : fetchBaseQuery({
-            baseUrl : 'https://mytinerary-guises-node.herokuapp.com/'
+            baseUrl : 'http://192.168.0.16:4000'
       }),
 
       endpoints: (builder) => ({

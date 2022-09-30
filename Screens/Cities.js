@@ -1,10 +1,12 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image, FlatList, TextInput} from 'react-native';
-import React, { useState } from 'react'
+import { StyleSheet, Text, View, TouchableOpacity, CommonActions , Image, BackHandler ,FlatList, TextInput} from 'react-native';
+import React, { useState, useEffect } from 'react'
 import { useGetAllCitiesQuery, useGetCityNameQuery } from '../src/features/citiesApi' 
 import Card from '../src/components/Card.js'
 import { useNavigation } from '@react-navigation/native';
+import logo from '../assets/logo-header.jpg';
 
-export default function Cities() {
+export default function Cities() {  
+
 
   const navigation = useNavigation(); 
 
@@ -21,8 +23,11 @@ export default function Cities() {
 
   return (
     <View style={styles.container}>
+      <View>
+            <Image source={logo} resizeMode={'cover'} style={styles.logo} />
+      </View>
       <TextInput placeholder={'Enter city...'} style={styles.input} onChangeText={(value)=> setInput(upperCaseOne(value))} />
-      <FlatList data={filteredData?.length > 0 ? filteredData : citiesResponse} renderItem={({ item }) => (
+      <FlatList style={styles.flatlist} keyExtractor={item => item?._id} data={filteredData?.length > 0 ? filteredData : citiesResponse} renderItem={({ item }) => (
         <TouchableOpacity onPress={() => navigation.navigate('Details', item?._id)}>
           <Card key={item?._id}>
             <Text key={item?._id} style={styles.text}>{ item?.city }</Text>
@@ -33,6 +38,7 @@ export default function Cities() {
           </Card>
         </TouchableOpacity>
       )} />
+    
     </View>
   );
 }
@@ -42,23 +48,20 @@ const styles = StyleSheet.create({
     boxSizing: 'border-box',
     margin: 0,
     padding: 0,
-    display: 'flex',
+    flex: 6,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 45,
-    marginTop: 20,
-    
+    backgroundColor: 'black'
   },
   image: {
     width: 300,
     height: 250,
     resizeMode: "cover",
-    borderRadius: 6,
-  },
+  }, 
   text: {
     fontSize: 25,
     color: "white",
-    backgroundColor:"#423f3e",
+    backgroundColor:"#3f0303",
     width:"100%",
     textAlign: "center",
     margin: 5,
@@ -67,11 +70,18 @@ const styles = StyleSheet.create({
   },
   input: {
     borderWidth: 1,
-    borderColor: 'grey',
+    borderColor: 'white',
     padding: 8,
     margin: 10,
     width: 200,
+    marginTop: 15,
     borderRadius: 10,
     textAlign: 'center',
+    backgroundColor: 'white'
+  },
+
+  logo: {
+    marginTop:10
   }
+  
 })

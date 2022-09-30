@@ -9,14 +9,12 @@ export default function Itineraries({id}) {
 
     const [getCity] = useGetItisMutation();
     const [itineraries, setItineraries] = useState()
-    console.log(itineraries);
 
     async function getEvent() {
         await getCity(id)
         .then((res)=>{
             if (res.data?.success) {
                 setItineraries(res.data.response)
-                console.log(itineraries);
             } else {
                 console.log(res.error)
             }
@@ -30,30 +28,33 @@ export default function Itineraries({id}) {
 return (
     <View style={styles.container}>
         <View>
-            {itineraries?.length > 0 ? <Text style={{fontSize: 30}}>Itineraries</Text> : <Text style={{fontSize: 30}}>No itineraries found</Text>}
+            {itineraries?.length > 0 ? <Text style={styles.titleIti}>Itineraries</Text> : <Text style={{fontSize:30}}>No itineraries found</Text>}
         </View>
-    <FlatList data={itineraries} renderItem={({ item }) => (
-        <TouchableOpacity onPress={() => navigation.navigate('Activities', item?._id)}>
+    {itineraries?.map((item) => (
+        <TouchableOpacity keyExtractor={itineraries => itineraries?._id} key={item?._id} onPress={() => navigation.navigate('Activities', item?._id)}>
+        
         <View style={styles.card} key={item?._id}>
         <View style={styles.cardContent}>
+        <View style={styles.containerUser}>
             <Image 
                 source={{uri:item?.user?.photo}}
                 style={styles.image}
             />
-            <Text style={styles.text}>{item?.user?.name}</Text>
-            <View>
-                <Text style={styles.text}>{item?.name}</Text>
-                <Text style={styles.text}>Likes:{item?.likes?.length}</Text>
-                <Text style={styles.text}>Duration: {item?.duration} minutes</Text>
-                <Text style={styles.text}>Price: ${item?.price}</Text>
+            <Text style={styles.textUser}>{item?.user?.name}</Text>
+            </View> 
+                <Text style={{ fontSize:23, borderBottomColor:"black", borderBottomWidth:2}}>{item?.name}</Text>
+                
+                <Text style={styles.textBody}>Duration: {item?.duration} minutes</Text>
+                <Text style={styles.textBody}>Price: ${item?.price}</Text>
                 <View>
-                    <Text style={styles.text}>Tags: {item?.tags?.map((item) => <Text>{item} </Text>)}</Text>
+                    <Text key={item?._id} style={styles.text}>{item?.tags?.map((item) => <Text key={item?._id}>{item} </Text>)}</Text>
                 </View>
+                <Text style={styles.textBody}>Likes: {item?.likes?.length}</Text>
             </View>
         </View>
-        </View>
+        
         </TouchableOpacity>
-      )} />
+    ))}
     </View>
 )
 }
@@ -73,11 +74,30 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     resizeMode: 'cover',
-    borderRadius: 30
+    borderRadius: 30,
+    marginTop: 15
     },
+
+    containerUser: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: 'center',
+        color:"white",
+        backgroundColor: "black",
+        width:"100%",
+    },
+
+    textUser:{
+        color:"white",
+        fontSize:17,
+        margin:10
+    },
+
     text: {
-    fontSize: 18
+    fontSize: 18,
+    textAlign:"center"
     },
+
     card: {
         borderRadius: 6,
         elevation: 3,
@@ -90,14 +110,40 @@ const styles = StyleSheet.create({
         marginVertical: 6,
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 12,
+        },
+        shadowOpacity: 0.58,
+        shadowRadius: 16.00,
+
+        elevation: 24,
       },
+
       cardContent: {
         marginHorizontal: 18,
         marginVertical: 20,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        width: 300
+        width: 300,
+        
+      },
+
+      textBody: {
+        fontSize:18,
+        margin:2,
+        textAlign: "left"
+      },
+
+      titleIti: {
+        fontSize:30,
+        width:250,
+        textAlign:"center",
+        borderBottomColor:"black",
+        borderBottomWidth:3,
+        marginBottom:10
       }
 })

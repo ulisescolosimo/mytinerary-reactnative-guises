@@ -33,12 +33,10 @@ return (
       <DrawerNavigation.Screen name="Home" component={HomeScreen} />
       <DrawerNavigation.Screen name="Cities" component={Cities} />
       { logged ? <DrawerNavigation.Screen name="Sign Out" component={SignOut} /> : <DrawerNavigation.Screen name="Sign In" component={SignIn} />}
+      { logged ? null : <DrawerNavigation.Screen name="Sign Up" component={SignUp} />}
       <DrawerNavigation.Screen options={{
                   drawerItemStyle: { display: 'none' }
-
         }} name="Details" component={Detail} />
-      <DrawerNavigation.Screen name="SignUp" component={SignUp} />
-      <DrawerNavigation.Screen name="SignIn" component={SignIn} />
       <DrawerNavigation.Screen options={{
                   drawerItemStyle: { display: 'none' }
         }} name="Activities" component={Activities} />

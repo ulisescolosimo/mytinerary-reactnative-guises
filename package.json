@@ -41,8 +41,7 @@
     "react-redux": "^8.0.4",
     "redux": "^4.2.0",
     "scrcpy": "^1.1.6",
-    "expo-splash-screen": "~0.16.2",
-    "undefined": "expo-google-fonts/dev"
+    "expo-splash-screen": "~0.16.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"

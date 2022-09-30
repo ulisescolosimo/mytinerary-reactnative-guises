@@ -1,24 +1,24 @@
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image, Button } from 'react-native'
-import React from 'react'
+import { View, Text, StyleSheet, FlatList, Image, Button, CommonActions } from 'react-native'
+import React, { useEffect } from 'react'
 import { useGetActivitiesQuery } from '../src/features/activitiesAPI'
+import logo from '../assets/logo-header.jpg';
+import { useNavigation } from '@react-navigation/native';
 
 export default function Activities({route}) {
 
-    console.log(route.params);
-
-    const {data: acts} = useGetActivitiesQuery(route.params)
+    const {data: acts, refetch} = useGetActivitiesQuery(route.params)
 
     const activities = acts?.response
 
-    console.log(activities);
+    const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
         <View>
-            {activities?.length > 0 ? <Text style={{fontSize: 30}}>Activities</Text> : <Text style={{fontSize: 30}}>No activities found</Text>}
+            {activities?.length > 0 ? <Image source={logo} resizeMode={'cover'} style={styles.logo} /> : <Text style={{fontSize: 30}}>No activities found</Text>}
         </View>
     <FlatList data={activities} renderItem={({ item }) => (
-        <View style={styles.card} key={item?._id}>
+        <View style={styles.card}>
         <View style={styles.cardContent}>
             <Image 
                 source={{uri:item?.photo}}
@@ -28,11 +28,13 @@ export default function Activities({route}) {
             <View style={{display: 'flex', justifyContent:'center', alignItems:'center'}}>
                 <Text style={styles.text}>{item?.name}</Text>
                 <Text style={styles.text}>Duration: {item?.itinerary?.duration} minutes</Text>
-                <Button title={'Like'} />
+                <Button title={'Like'} color={"black"} onPress={() => {
+                        alert('Activity liked!');
+                }}/>
             </View>
         </View>
         </View>
-      )} />
+    )} />
     </View>
 )
 }
@@ -42,11 +44,13 @@ const styles = StyleSheet.create({
     boxSizing: 'border-box',
     margin: 0,
     padding: 0,
-    display: 'flex',
+    flex: 1,
     justifyContent: 'center',
+    backgroundColor: 'black',
     alignItems: 'center',
-    marginBottom: 45,
-    marginTop: 20
+    },
+    logo : {
+        marginTop: 10
     },
     image: {
     width: 300,
@@ -54,7 +58,8 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
     },
     text: {
-    fontSize: 18
+    fontSize: 18,
+    marginBottom:10
     },
     card: {
         borderRadius: 6,

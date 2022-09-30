@@ -21,19 +21,22 @@ export default function Carousel({cities}) {
         pagingEnabled={true}
         scrollEnabled={true}
         scrollEventThrottle={16}
-        keyExtractor={(city) => city.photo} 
+        keyExtractor={(city) => city._id} 
         renderItem={({ item }) => {
           return (
           <Animated.View style={{
             marginTop:30,
             width:400,
-            height: 250,     
+            height: 250,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'   
             }}>
             <Image 
                 source={{uri:item.photo}}
                 style={styles.image}
             />
-            <Text style={{textAlign:'center', fontSize: 30, color: 'white'}}>{item.city}</Text>
+            <Text style={styles.text}>{item.city}</Text>
           </Animated.View>)  
             
         }}
@@ -49,6 +52,19 @@ const styles = StyleSheet.create({
   },
   image: {
     height: 220,
-    resizeMode: 'contain',
-  }
+    width: 350,
+    resizeMode: 'cover',
+    position: 'absolute',
+    borderColor:"red",
+    borderRadius:10
+  },
+  
+  text: {
+    textAlign:'center',
+    fontSize: 30, 
+    color: 'white', 
+    top:70,
+    width:350,
+    backgroundColor:"rgba(0, 0, 0, 0.711)"
+  },
 })

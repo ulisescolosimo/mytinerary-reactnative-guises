@@ -20,7 +20,7 @@ export default function Welcome({title}) {
         <View style={{width: '100%', display: 'flex', justifyContent: 'center', alignItems:'center'}}>
         <TouchableOpacity onPress={() => navigation.navigate('Cities')}
           style={styles.button}>
-          <Text style={{ fontSize: 20, color: 'black' }}>Start trip!</Text>
+          <Text style={{ fontSize: 20, color: 'white' }}>Start trip!</Text>
         </TouchableOpacity>
         </View>
       <StatusBar style="auto" />
@@ -45,14 +45,16 @@ const styles = StyleSheet.create({
       
     },
     button: {
-      backgroundColor: 'white',
-      padding: 20,
+      padding: 10,
       borderRadius: 10,
-      borderWidth: 2,
+      borderWidth: 1,
+      borderColor: 'white',
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
       textAlign: 'center',
+      fontWeight: 600,
+      backgroundColor:"rgba(0, 0, 0, 0.711)"
     },
     myTiText: {
       fontSize: 50,
@@ -60,7 +62,7 @@ const styles = StyleSheet.create({
       letterSpacing: 6,
       fontStyle: 'italic',
       marginTop:50,
-      fontFamily: 'Roboto'
+      
     },
 
     title: {
@@ -69,6 +71,7 @@ const styles = StyleSheet.create({
       fontSize: 20,
       margin: 30,
       paddingBottom:15,
-      fontFamily: 'RobotoSlab_400Regular                                                                   '
+                                                    
+                                                      
     }
 })

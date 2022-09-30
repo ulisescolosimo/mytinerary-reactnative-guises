@@ -18,6 +18,7 @@ export default function SignOut() {
                 .then((success) => {
                     dispatch(loggedReverse())
                     navigation.navigate('Home')
+                    alert('Signed out!')
                 })
         }
         } catch(e) {
@@ -26,7 +27,7 @@ export default function SignOut() {
     }
 
   return (
-    <View>
+    <View style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
       <Button title={'Sign Out'} onPress={getData} />
     </View>
   )
