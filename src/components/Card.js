@@ -28,8 +28,8 @@ const styles = StyleSheet.create({
     focusable: true
   },
   cardContent: {
-    marginHorizontal: 18,
-    marginVertical: 20,
+    marginHorizontal: 10,
+    marginVertical: 10,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
