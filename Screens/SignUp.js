@@ -1,165 +1,209 @@
 import { View, Text } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, TouchableOpacity, Image, TextInput, Dimensions} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { FontAwesome5 } from '@expo/vector-icons'; 
-import travelers from '../assets/travelers.png'
+import { useGetNewUserMutation } from '../src/features/usersAPI'
 
 export default function SignUp() {
 
-const {width: screenWidth, height: screenHeigth} = Dimensions.get('window');
-const navigation = useNavigation(); 
-      
-  return (
+      const {width: screenWidth, height: screenHeigth} = Dimensions.get('window');
+      const navigation = useNavigation(); 
+
+      const [newUser] = useGetNewUserMutation()
+
+      const [nameRef, setName] = useState()
+      const [emailRef, setEmail] = useState()
+      const [passwordRef, setPassword] = useState()
+      const [imageRef, setImage] = useState()
+      const [countryRef, setCountry] = useState()
+
+    const signUp = async(data) => {
+        await newUser(data)
+        .then((succes) => {
+            if(succes?.error){
+                alert('Error trying register')
+            } else {
+                alert("Sign up successfully. Please check your email to verify account")
+                navigation.navigate('Sign In')
+            }
+        }) 
+        .catch(error => alert(error))
+    }
+    
+    const handleForm = async(e) => {
+    
+            e.preventDefault();
+    
+            let data = {
+            country: countryRef,
+            photo: imageRef,
+            name: nameRef,
+            pass: passwordRef,
+            email: emailRef,
+            from: 'form',
+            role: 'user',
+            }
+    
+            if(emailRef == "" || passwordRef == "" || nameRef == "" || countryRef == "" || imageRef == ""){
+                alert('Please fill all credentials')
+            } else {
+                signUp(data)
+            }
+    }
+    
+return (
     <View style={{
-      width: screenWidth,
-      height: screenHeigth,
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      
-      }}>
-            <View style={SignUpstyles.containerIntro}>
-
-                  <Text style={SignUpstyles.titleIntro}>Do you Belong ?
-                  </Text>
-
-                  <Text style={SignUpstyles.titleInfo}>If you already have an account sign in here!
-                  </Text>
-
-                  <TouchableOpacity onPress={() => navigation.navigate('SignIn')}
-                        style={SignUpstyles.button}>
-                        <Text style={{ fontSize: 17, color: 'white', textAlign:'center' }}>Sign In</Text>
-                  </TouchableOpacity>
-
-                  <Image
-                        source={travelers}
-                        style={SignUpstyles.image}
-                  />               
-
-            </View>
+    width: screenWidth,
+    height: screenHeigth,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+    }}>
             
             <View style={SignUpstyles.containerForm}>
-                  <Text style={SignUpstyles.h1}>
+                <Text style={SignUpstyles.h1}>
                         Sign Up
-                  </Text>
-                  <View style={SignUpstyles.inputContainer}>
-                  
-                  
-                  <TextInput placeholder={' Full name'} style={SignUpstyles.input} onChangeText={(value)=> setInput(value)}/>  
-                  </View>
-                  <View style={SignUpstyles.inputContainer}>
-                  <TextInput placeholder={' Email'} style={SignUpstyles.input} onChangeText={(value)=> setInput(value)}  /> 
-                  </View>
-                  <View style={SignUpstyles.inputContainer}>
-                  <TextInput placeholder={' Password'} style={SignUpstyles.input} onChangeText={(value)=> setInput(value)} /> 
-                  </View>
-                  <View style={SignUpstyles.inputContainer}>
-                  <TextInput placeholder={' Image'} style={SignUpstyles.input} onChangeText={(value)=> setInput(value)} /> 
-                  </View>
-                  <View style={SignUpstyles.inputContainer}>
-                  <TextInput placeholder={' Country'} style={SignUpstyles.input} onChangeText={(value)=> setInput(value)} /> 
-                  </View>
-                  
-                  <TouchableOpacity onPress={() => navigation.navigate('SingIn')}
+                </Text>
+                <View style={SignUpstyles.inputContainer}>
+                
+                
+                <TextInput placeholder={' Full name'} style={SignUpstyles.input} onChangeText={(value)=> setName(value)}/>  
+                </View>
+                <View style={SignUpstyles.inputContainer}>
+                <TextInput placeholder={' Email'} style={SignUpstyles.input} onChangeText={(value)=> setEmail(value)}  /> 
+                </View>
+                <View style={SignUpstyles.inputContainer}>
+                <TextInput secureTextEntry={true} placeholder={' Password (min 8 caracters)'} style={SignUpstyles.input} onChangeText={(value)=> setPassword(value)} /> 
+                </View>
+                <View style={SignUpstyles.inputContainer}>
+                <TextInput placeholder={' Image'} style={SignUpstyles.input} onChangeText={(value)=> setImage(value)} /> 
+                </View>
+                <View style={SignUpstyles.inputContainer}>
+                <TextInput placeholder={' Country'} style={SignUpstyles.input} onChangeText={(value)=> setCountry(value)} /> 
+                </View>
+                
+                <TouchableOpacity onPress={handleForm}
                         style={SignUpstyles.button}>
                         <Text style={{ fontSize: 17, color: 'white', textAlign:'center' }}>Sign Up</Text>
-                  </TouchableOpacity>
-                  <Text style={{color:"white"}}>Or</Text>
+                </TouchableOpacity>
             </View>
-       
+
+            <View style={SignUpstyles.containerIntro}>
+
+                <Text style={SignUpstyles.titleIntro}>Do you Belong ?
+                </Text>
+
+                <Text style={SignUpstyles.titleInfo}>If you already have an account sign in here!
+                </Text>
+
+                <TouchableOpacity onPress={() => navigation.navigate('Sign In')}
+                        style={SignUpstyles.button}>
+                        <Text style={{ fontSize: 17, color: 'white', textAlign:'center' }}>Sign In</Text>
+                </TouchableOpacity>            
+
+            </View>
+    
     </View>
-  )
+)
 }
 
 const SignUpstyles = StyleSheet.create({
-      
-      containerIntro: {
-            width:"90%",
-            height:"38%",
-            backgroundColor: "black",
-            borderTopLeftRadius:20,
-            borderTopRightRadius:20,
-            display: 'flex',
-            alignItems: 'center',
-            
-            
-           
-      } ,
+    
+    containerIntro: {
+        width:"90%",
+        height:"30%",
+        backgroundColor: "black",
+        borderBottomLeftRadius:20,
+        borderBottomRightRadius:20,
+        display: 'flex',
+        alignItems: 'center',
+        marginBottom: 60
+    } ,
 
-      containerForm : {
-            width:"90%",
-            height:"40%",
-            backgroundColor: '#3f0303',
-            marginBottom: 85,
-            borderBottomLeftRadius:20,
-            borderBottomRightRadius:20,
-            display: 'flex',
-            alignItems: "center"
-      
-      },
+    containerForm : {
+        width:"90%",
+        height:"53%",
+        backgroundColor: '#3f0303',
+        borderTopLeftRadius:20,
+        borderTopRightRadius:20,
+        display: 'flex',
+        alignItems: "center",
+        marginTop: 10
+    },
 
-      titleIntro: {
-      color: 'white',
-      fontSize: 25,
-      marginTop: 10
-      },
+    titleIntro: {
+    color: 'white',
+    fontSize: 24,
+    marginTop: 10
+    },
 
-      titleInfo: {
-            textAlign:'center',
-            color: 'white',
-            fontSize: 18,
-            margin: 20
-      },
+    titleInfo: {
+        textAlign:'center',
+        color: 'white',
+        fontSize: 15,
+        margin: 10,
+        marginHorizontal: 15,
+        marginBottom: 25
+    },
+    buttonLogin: {
+        backgroundColor: '#3f0303',
+        color:"white",
+        marginHorizontal: 30,
+        borderRadius:20,
+        borderColor:"white",
+        borderWidth:2,
+        padding:3,
+        width: "30%",
+    },
 
-      image: {
-           width: "100%",
-           height: "45%",
-           resizeMode:'contain'
-      },
+    image: {
+        width: "100%",
+        height: "35%",
+        resizeMode:'contain'
+    },
 
-      button: {
-            backgroundColor: '#3f0303',
-            color:"white",
-            marginBottom:25,
-            borderRadius:20,
-            borderColor:"white",
-            borderWidth:2,
-            padding:3,
-            width: "30%",
-      },
+    button: {
+        backgroundColor: '#3f0303',
+        color:"white",
+        borderRadius:20,
+        borderColor:"white",
+        borderWidth:2,
+        padding:3,
+        width: "30%",
+        marginBottom: 20,
+        marginTop: 10
+    },
 
-      h1: {
-            color: "white",
-            fontSize: 30,
-            textAlign: "center",
-            fontWeight:'bold',
-            letterSpacing: 2,
-            marginTop: 10
+    h1: {
+        color: "white",
+        fontSize: 25,
+        textAlign: "center",
+        fontWeight:'bold',
+        letterSpacing: 2,
+        marginTop: 10
 
-      },
-      
-      input: {
-            backgroundColor: "white",
-            width: "50%",
-            
+    },
+    
+    input: {
+        backgroundColor: "white",
+        width: "100%",
+        borderRadius: 40,
+        padding: 5
+    },
 
-      },
+    inputContainer: {
+        backgroundColor: "white",
+        width: '80%', 
+        margin:8,
+        display:'flex',
+        flexWrap:'wrap',
+        borderRadius: 30,
+    },
 
-      inputContainer: {
-            backgroundColor: "white",
-            width: '80%', 
-            margin:8,
-            display:'flex',
-            flexWrap:'wrap'            
-                     
-            
-      },
-
-      icon: {
-            background: "red",
-            width: "10%",
-            
-      }
+    icon: {
+        background: "red",
+        width: "10%",
+        
+    }
 
 })

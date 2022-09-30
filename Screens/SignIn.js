@@ -1,6 +1,6 @@
 import { View, Text } from 'react-native'
 import React, { useState } from 'react'
-import { StyleSheet, TouchableOpacity, Image, TextInput, Dimensions} from 'react-native';
+import { StyleSheet, TouchableOpacity, Image, TextInput, Dimensions, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import { loggedTrue } from '../src/features/loggedSlice'
 import travelers from '../assets/travelers.png'
 import { useGetLoginMutation } from '../src/features/usersAPI'
@@ -22,19 +22,26 @@ export default function SignIn() {
     const [newLogin] = useGetLoginMutation()
 
     const signIn = async(data) => {
-        try{
-            await newLogin(data)
-                .then((success) => {
-                    let user = success?.data?.response?.user
-                    AsyncStorage.setItem('user', JSON.stringify(user))
-                    setEmail('')
-                    setPassword('')
-                })
+        await newLogin(data)
+        .then((success) => {
+            console.log(success);
+        let user = success?.data?.response?.user
+        let token = success?.data?.response?.token
+        if(user != undefined){
+                AsyncStorage.setItem('user', JSON.stringify(user))
+                AsyncStorage.setItem('token', JSON.stringify(token))
+                setEmail('')
+                setPassword('')
                 dispatch(loggedTrue())
                 navigation.navigate('Cities')
-        }catch(error){
-            console.log(error);
+                alert('Signed in!')
+        } else {
+                alert('You wont pass!')
         }
+        })
+        .catch((error) => {
+                console.log(error);
+        })
     }
 
     const handleForm = async(e) => {
@@ -47,6 +54,7 @@ export default function SignIn() {
         from: 'form'
         }
 
+        console.log(data);
         signIn(data)
     }
     
@@ -58,27 +66,8 @@ return (
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    
     }}>
-            <View style={SignInstyles.containerIntro}>
-
-                <Text style={SignInstyles.titleIntro}>Do you Belong ?
-                </Text>
-
-                <Text style={SignInstyles.titleInfo}>If you don't have an account, sign up here!
-                </Text>
-
-                  <TouchableOpacity onPress={() => navigation.navigate('SignUp')}
-                        style={SignInstyles.button}>
-                        <Text style={{ fontSize: 17, color: 'white', textAlign:'center' }}>Sign Up</Text>
-                </TouchableOpacity>
-
-                <Image
-                        source={travelers}
-                        style={SignInstyles.image}
-                />               
-
-            </View>
+            
             
             <View style={SignInstyles.containerForm}>
                 <Text style={SignInstyles.h1}>
@@ -97,6 +86,26 @@ return (
                 </TouchableOpacity>
                 </View>
             </View>
+
+            <View style={SignInstyles.containerIntro}>
+
+                <Text style={SignInstyles.titleIntro}>Do you Belong ?
+                </Text>
+
+                <Text style={SignInstyles.titleInfo}>If you don't have an account, sign up here!
+                </Text>
+
+                <TouchableOpacity onPress={() => navigation.navigate('Sign Up')}
+                        style={SignInstyles.button}>
+                        <Text style={{ fontSize: 17, color: 'white', textAlign:'center' }}>Sign Up</Text>
+                </TouchableOpacity>
+
+                <Image
+                        source={travelers}
+                        style={SignInstyles.image}
+                />               
+
+            </View>
     </View>
 )
 }
@@ -104,24 +113,24 @@ return (
 const SignInstyles = StyleSheet.create({
     
     containerIntro: {
-            width:"90%",
-            height:"38%",
-            backgroundColor: "black",
-            borderTopLeftRadius:20,
-            borderTopRightRadius:20,
-            display: 'flex',
-            alignItems: 'center',
+        width:"90%",
+        height:"40%",
+        backgroundColor: "black",
+        borderBottomLeftRadius:20,
+        borderBottomRightRadius:20,
+        display: 'flex',
+        alignItems: 'center',
+        marginBottom: 50
     } ,
 
     containerForm : {
-            width:"90%",
-            height:"40%",
-            backgroundColor: '#3f0303',
-            marginBottom: 85,
-            borderBottomLeftRadius:20,
-            borderBottomRightRadius:20,
-            display: 'flex',
-            alignItems: "center"
+        width:"90%",
+        height:"40%",
+        backgroundColor: '#3f0303',
+        borderTopLeftRadius:20,
+        borderTopRightRadius:20,
+        display: 'flex',
+        alignItems: "center"
     
     },
 
@@ -133,10 +142,11 @@ const SignInstyles = StyleSheet.create({
     },
 
     titleInfo: {
-            textAlign:'center',
-            color: 'white',
-            fontSize: 18,
-            margin: 20
+        textAlign:'center',
+        color: 'white',
+        fontSize: 18,
+        margin: 10,
+        marginHorizontal: 15
     },
     buttonLogin: {
         backgroundColor: '#3f0303',
@@ -151,51 +161,51 @@ const SignInstyles = StyleSheet.create({
 
     image: {
         width: "100%",
-        height: "45%",
+        height: "36%",
         resizeMode:'contain'
     },
 
     button: {
-            backgroundColor: '#3f0303',
-            color:"white",
-            marginBottom:20,
-            borderRadius:20,
-            borderColor:"white",
-            borderWidth:2,
-            padding:3,
-            width: "30%",
+        backgroundColor: '#3f0303',
+        color:"white",
+        marginBottom:20,
+        borderRadius:20,
+        borderColor:"white",
+        borderWidth:2,
+        padding:3,
+        width: "30%",
     },
 
     h1: {
-            color: "white",
-            fontSize: 30,
-            textAlign: "center",
-            fontWeight:'bold',
-            letterSpacing: 2,
-            marginTop: 10
+        color: "white",
+        fontSize: 30,
+        textAlign: "center",
+        fontWeight:'bold',
+        letterSpacing: 2,
+        marginTop: 10
 
     },
     
     input: {
-            backgroundColor: "white",
-            width: "100%",
-            borderRadius: 40,
-            padding: 10
+        backgroundColor: "white",
+        width: "100%",
+        borderRadius: 40,
+        padding: 10
     },
 
     inputContainer: {
-            backgroundColor: "white",
-            width: '80%', 
-            margin:8,
-            display:'flex',
-            flexWrap:'wrap',
-            borderRadius: 30,
+        backgroundColor: "white",
+        width: '80%', 
+        margin:8,
+        display:'flex',
+        flexWrap:'wrap',
+        borderRadius: 30,
     },
 
     icon: {
-            background: "red",
-            width: "10%",
-            
+        background: "red",
+        width: "10%",
+        
     }
 
 })
